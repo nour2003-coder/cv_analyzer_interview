@@ -1,0 +1,23 @@
+# Environment variables (API keys, secrets)
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Chroma vector DB (local data)
+chroma/
+
+# Uploaded files
+uploaded_cvs/
+
+# IDE
+.vscode/
+.idea/

@@ -1,0 +1,39 @@
+# Web / API
+streamlit
+fastapi
+uvicorn
+requests
+
+# LangChain stack
+langchain>=0.1.9
+langgraph>=0.0.27
+langchain-openai>=0.0.8
+langchain-community
+langchain-core
+langchain-huggingface
+
+# LLM / embeddings
+openai
+sentence-transformers
+transformers
+torch
+torchvision
+
+# CV parsing
+pypdf
+pdfplumber
+chromadb
+json-repair
+
+# Data / ML
+scikit-learn
+pydantic>=2.5.0
+
+# Database
+pymongo
+
+# PDF generation
+reportlab
+
+# Utilities
+python-dotenv
