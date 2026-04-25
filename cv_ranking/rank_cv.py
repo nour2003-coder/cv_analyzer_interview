@@ -108,14 +108,14 @@ def semantic_match(text1, text2):
     return cosine_similarity([emb1], [emb2])[0][0]
 
 
-def skill_match_count(cv_skills, jd_skills, threshold=0.75):
+def skill_match_count(cv_skills, jd_skills, threshold=0.5):
     if not jd_skills:
         return 0, 0, set()
 
     cv_skills = [s.lower() for s in cv_skills]
     jd_skills = [s.lower() for s in jd_skills]
 
-    matched = set(cv_skills) & set(jd_skills)   # exact matches first
+    matched = set(cv_skills) & set(jd_skills)   
 
     cv_embs = model.encode(cv_skills)
     jd_embs = model.encode(jd_skills)

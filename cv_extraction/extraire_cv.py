@@ -69,8 +69,7 @@ def clean_text(ch):
 
 def json_parser(ch, failed_json):
     try:
-        # FIX: was parsing original `ch` after cleaning to `cleaned` but then
-        # discarding `cleaned` and passing raw `ch` to json.loads
+
         cleaned = clean_text(ch)
         return json.loads(cleaned)
     except json.JSONDecodeError:
@@ -155,7 +154,6 @@ def setup_llm(api_key, model_name, vector_store):
 # ─────────────────────────────────────────────
 
 def extract_info(query, llm_chain, failed_json):
-    # FIX: original signature had an unused `vector_store` parameter
     try:
         raw_result = llm_chain.invoke(query)
         js = json_parser(raw_result, failed_json)
@@ -168,9 +166,6 @@ def extract_info(query, llm_chain, failed_json):
 
 
 def extract_cv_with_fallback(query, primary_chain, fallback_chain, fallback_chain2, failed_json):
-    # FIX 1: original had `vector_store` param that was passed to extract_info
-    #         but extract_info never used it
-    # FIX 2: final return referenced `failed_json` as `failed_json` (typo: was `failedjson`)
     result = extract_info(query, primary_chain, failed_json)
     if result != failed_json and result != {}:
         logger.info("Primary LLM succeeded.")
@@ -328,7 +323,7 @@ def extract_education(llm_model, llm_model2, llm_model3, cv_failed_json):
         ]
     }
     """
-    # FIX: original prompt had Python `None` instead of JSON `null`
+
     failed_json = cv_failed_json['education']
     return extract_cv_with_fallback(query, llm_model, llm_model2, llm_model3, failed_json)
 
@@ -383,7 +378,7 @@ def extract_projects(llm_model, llm_model2, llm_model3, cv_failed_json):
         ]
     }
     """
-    # FIX: original used single-quotes in the JSON template (invalid JSON)
+
     failed_json = cv_failed_json['projects']
     return extract_cv_with_fallback(query, llm_model, llm_model2, llm_model3, failed_json)
 
@@ -494,8 +489,7 @@ def build_cv(sections):
 
 
 def verification(parsed_data, cv, failed_json):
-    # FIX: original had no guard against parsed_data being None,
-    # which causes a crash when RapidAPI fails
+
     if not parsed_data or "data" not in parsed_data:
         logger.warning("RapidAPI data unavailable; skipping verification step.")
         return cv
@@ -602,5 +596,4 @@ def extract_cv(path):
 
     clean_vector_store(vector_store)
 
-    # FIX: original returned None — should return the built cv
     return cv
