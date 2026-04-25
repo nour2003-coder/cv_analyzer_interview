@@ -139,7 +139,10 @@ def experience_score(cv_exp_years, required_exp):
 
 
 def education_score(cv_edu, jd_edu):
-    return semantic_match(cv_edu, jd_edu)
+    s=semantic_match(cv_edu, jd_edu)
+    if s>0:
+        return s
+    return 0
 
 
 # ─────────────────────────────────────────────
