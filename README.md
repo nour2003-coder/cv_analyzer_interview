@@ -47,8 +47,8 @@ merged_app/
 ### 1. Clone & create a virtual environment
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd merged_app
+git clone https://github.com/nour2003-coder/cv_analyzer_interview.git
+cd cv_analyzer_interview
 python -m venv venv
 venv\Scripts\activate        # Windows
 # source venv/bin/activate   # macOS/Linux
